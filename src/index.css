@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Redefining Slate for Cozy Studio (Cream bgs, beige cards, woody warm browns) */
+  --color-slate-50: #FCFDF9;
+  --color-slate-100: #1D1007; /* Espresso */
+  --color-slate-200: #291B12; /* Mahogany text */
+  --color-slate-300: #38281F; /* Walnut Walnut Walnut */
+  --color-slate-400: #5E4A3E; /* Warm Cocoa */
+  --color-slate-450: #715D51; /* Cinnamon text */
+  --color-slate-500: #715D51; /* Soft Earth dust */
+  --color-slate-550: #887467;
+  --color-slate-600: #A08C7F; /* Nutmeg */
+  --color-slate-700: #C2B0A3; /* Cozy Sand */
+  --color-slate-800: #E3D7CC; /* Warm Linen */
+  --color-slate-850: #EFE8E0; /* Warm Biscuit Card Border */
+  --color-slate-900: #FAF5EE; /* Rich Cozy Beige Card */
+  --color-slate-905: #F0E8DC; /* Muted biscuit tab background */
+  --color-slate-950: #FDFBF7; /* Delicious Soft Cream Background */
+  --color-slate-955: #FAF5ED; /* Cozy sidebar menu bg */
+
+  /* Overriding White to the deepest espresso so text-white behaves perfectly on light background */
+  --color-white: #1D1007;
+
+  /* Muted organic garden tones for a rustic wooden studio feel instead of cyber-neon */
+  --color-amber-400: #B45309; /* Cedar wood / warm honey */
+  --color-amber-500: #9A3412; /* Rich Mahogany */
+  --color-amber-600: #7C2D12; /* Dark Oak */
+  --color-cyan-400: #6B7A5D; /* Muted Pine / Olive leaf */
+  --color-cyan-500: #526343; /* Forest Shadow */
+  --color-emerald-405: #4B6E5B; /* Sage Green */
+  --color-emerald-400: #4B6E5B; /* Sage Green */
+  --color-emerald-500: #375947; /* Oak leaf */
+  --color-teal-400: #8F7660; /* Walnut Shell */
+  --color-teal-500: #735C48; /* Soil brown */
+  --color-indigo-400: #D97706; /* Sweet honey glow */
+  --color-indigo-950: #FAF5EE; /* Reverse background for header blocks */
+  --color-purple-400: #AD5C3E; /* Clay pot / terracotta red */
+  --color-purple-500: #8F4226; /* Dark Terracotta */
+  --color-rose-450: #9E3523; /* Rust */
+  --color-pink-500: #8B4513; /* Saddle brown */
+
+  --font-display: "Inter", var(--font-sans);
+}
+
+body {
+  background-color: #FDFBF7;
+  font-family: var(--font-sans);
+  color: #1D1007; /* Espresso */
+}
+
+/* Specific Cozy wood card glows and cozy vibes */
+.neon-glow-amber {
+  box-shadow: 0 4px 20px rgba(180, 83, 9, 0.08);
+}
+
+.neon-glow-cyan {
+  box-shadow: 0 4px 20px rgba(107, 122, 93, 0.08);
+}
+
+.neon-glow-emerald {
+  box-shadow: 0 4px 20px rgba(75, 110, 91, 0.08);
+}
+
+/* Dynamic cozy overlays */
+.cozy-wooden-texture {
+  background-image: radial-gradient(circle at 100% 150%, #B45309 8%, transparent 80%), radial-gradient(circle at 0% -50%, #E3D7CC 15%, transparent 60%);
+}

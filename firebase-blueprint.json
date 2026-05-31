@@ -1,0 +1,26 @@
+{
+  "entities": {
+    "users": {
+      "title": "User",
+      "description": "Stores user profiles and practice progression statistics.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique user ID" },
+        "level": { "type": "integer", "description": "Current player level (1 to 7)" },
+        "xp": { "type": "integer", "description": "Total experience points gained" },
+        "streak": { "type": "integer", "description": "Daily practice streak count" },
+        "lastPracticeDate": { "type": "string", "description": "ISO date of last logged practice" },
+        "completedSessions": { "type": "integer", "description": "Total number of practice sessions completed" },
+        "badges": { "type": "array", "description": "List of unlocked badge ids" },
+        "skills": { "type": "object", "description": "Skills percentage masteries (scales, rhythm, chords, ear, songs)" }
+      },
+      "required": ["uid", "level", "xp", "streak"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "users",
+      "description": "User statistics and progress document synchronized per authenticated user."
+    }
+  }
+}

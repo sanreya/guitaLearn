@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidUser(data, userId) {
+      return data.uid == request.auth.uid &&
+             data.uid == userId &&
+             data.level is int && data.level >= 1 && data.level <= 7 &&
+             data.xp is int && data.xp >= 0 &&
+             data.streak is int && data.streak >= 0 &&
+             data.completedSessions is int && data.completedSessions >= 0 &&
+             data.lastPracticeDate is string && data.lastPracticeDate.size() <= 20 &&
+             data.badges is list && data.badges.size() <= 30 &&
+             data.skills is map &&
+             data.skills.scales is int && data.skills.scales >= 0 && data.skills.scales <= 100 &&
+             data.skills.rhythm is int && data.skills.rhythm >= 0 && data.skills.rhythm <= 100 &&
+             data.skills.chords is int && data.skills.chords >= 0 && data.skills.chords <= 100 &&
+             data.skills.ear is int && data.skills.ear >= 0 && data.skills.ear <= 100 &&
+             data.skills.songs is int && data.skills.songs >= 0 && data.skills.songs <= 100;
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidId(userId) && isValidUser(incoming(), userId) &&
+                    incoming().keys().hasAll(['uid', 'level', 'xp', 'streak', 'lastPracticeDate', 'completedSessions', 'badges', 'skills']) &&
+                    incoming().keys().size() == 8;
+      allow update: if isOwner(userId) && isValidUser(incoming(), userId) &&
+                    incoming().uid == existing().uid &&
+                    incoming().diff(existing()).affectedKeys().hasAny(['level', 'xp', 'streak', 'lastPracticeDate', 'completedSessions', 'badges', 'skills']);
+      allow delete: if false;
+    }
+  }
+}

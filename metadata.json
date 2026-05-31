@@ -1,0 +1,6 @@
+{
+  "name": "Guitar Quest",
+  "description": "An AI-powered interactive guitar learning platform with structured practice routines, pitch detection analysis, scale metronomes, ear training, and exams.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
